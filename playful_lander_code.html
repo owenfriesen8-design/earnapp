@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download & Earn $100 Today</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #6D28D9 0%, #7C3AED 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Testimonial popup */
+        .testimonial-popup {
+            position: fixed;
+            top: -80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.5s ease;
+            max-width: 320px;
+            text-align: center;
+        }
+
+        .testimonial-popup.show {
+            top: 20px;
+            opacity: 1;
+        }
+
+        .testimonial-text {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-author {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            box-shadow: 0 25px 50px rgba(109, 40, 217, 0.4);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            padding: 40px 30px;
+            animation: slideUp 0.8s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .signup-bonus {
+            background: linear-gradient(45deg, #00FF88, #00E676);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 800;
+            margin: 0 0 20px 0;
+            box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4);
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 8px 25px rgba(0, 255, 136, 0.4); }
+            to { box-shadow: 0 12px 35px rgba(0, 255, 136, 0.6); }
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #6D28D9, #7C3AED);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .steps-container {
+            background: #F8FAFF;
+            border-radius: 20px;
+            padding: 25px 20px;
+            margin: 25px 0;
+            text-align: left;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            margin: 15px 0;
+            gap: 15px;
+        }
+
+        .step-number {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(45deg, #00FF88, #00E676);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 5px 15px rgba(0, 255, 136, 0.3);
+        }
+
+        .step-number::after {
+            content: '✓';
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .step-content h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 3px;
+        }
+
+        .step-earning {
+            font-size: 16px;
+            font-weight: 800;
+            background: linear-gradient(45deg, #FDE047, #FACC15);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .download-prompt {
+            font-size: 16px;
+            color: #6D28D9;
+            font-weight: 700;
+            margin: 20px 0 15px;
+        }
+
+        .cta-button {
+            background: linear-gradient(45deg, #00FF88, #00E676);
+            color: white;
+            border: none;
+            padding: 18px 35px;
+            font-size: 18px;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.5);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.6);
+        }
+
+        .cta-button:active {
+            transform: translateY(0);
+        }
+
+        .app-rating {
+            margin: 20px 0 15px;
+        }
+
+        .stars {
+            color: #FDE047;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+
+        .rating-text {
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        .user-counter {
+            background: rgba(255,255,255,0.9);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 700;
+            color: #6D28D9;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(109, 40, 217, 0.2);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 25px;
+                margin: 10px;
+                max-width: 350px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .cta-button {
+                font-size: 16px;
+                padding: 16px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Testimonial popup -->
+    <div class="testimonial-popup" id="testimonialPopup">
+        <div class="testimonial-text" id="testimonialText"></div>
+        <div class="testimonial-author" id="testimonialAuthor"></div>
+    </div>
+    
+    <div class="container">
+        <div class="signup-bonus">
+            🎉 $100 INSTANT SIGNUP BONUS! 🎉
+        </div>
+        
+        <h1>Download & Earn $100 Today</h1>
+        <div class="subtitle">Join 500,000+ players making real money daily</div>
+        
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number"></div>
+                <div class="step-content">
+                    <h3>1. Download app + sign up</h3>
+                    <div class="step-earning">Instantly earn $100</div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number"></div>
+                <div class="step-content">
+                    <h3>2. Play games to unlock rewards</h3>
+                    <div class="step-earning">Earn $5-25 per game</div>
+                </div>
+            </div>
+            
+            <div class="step">
+                <div class="step-number"></div>
+                <div class="step-content">
+                    <h3>3. Complete tasks for bonuses</h3>
+                    <div class="step-earning">Extra $50-200/day</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="download-prompt">👇 Tap below to download & start earning 👇</div>
+        
+        <button class="cta-button" onclick="handleClick()">
+            📱 DOWNLOAD & GET $100 NOW
+        </button>
+        
+        <div class="app-rating">
+            <div class="stars">★★★★★</div>
+            <div class="rating-text">4.8/5 • 50,000+ Reviews</div>
+        </div>
+        
+        <div class="user-counter">
+            🔥 <span id="userCount">1,372</span> people downloaded in the last hour
+        </div>
+    </div>
+
+    <script>
+        // Testimonials data
+        const testimonials = [
+            { text: "Making $200+ daily with this app!", author: "- David C." },
+            { text: "Got my $100 signup bonus in 30 seconds ⚡", author: "- Lisa P." },
+            { text: "Made $143 yesterday! This app is legit 🤑", author: "- Sarah M." },
+            { text: "Earned $67 in 3 hours playing games 🎮", author: "- Emma K." },
+            { text: "Best money-making app I've ever used!", author: "- Josh T." },
+            { text: "$100 bonus hit my account instantly!", author: "- Mike R." }
+        ];
+
+        let testimonialIndex = 0;
+        
+        // Show testimonial popup
+        function showTestimonial() {
+            const popup = document.getElementById('testimonialPopup');
+            const text = document.getElementById('testimonialText');
+            const author = document.getElementById('testimonialAuthor');
+            
+            text.textContent = testimonials[testimonialIndex].text;
+            author.textContent = testimonials[testimonialIndex].author;
+            
+            popup.classList.add('show');
+            
+            setTimeout(() => {
+                popup.classList.remove('show');
+            }, 4000);
+            
+            testimonialIndex = (testimonialIndex + 1) % testimonials.length;
+        }
+        
+        // Show first testimonial after 2 seconds, then every 6 seconds
+        setTimeout(showTestimonial, 2000);
+        setInterval(showTestimonial, 6000);
+        
+        // User counter animation
+        let userCount = 1372;
+        
+        function updateUserCount() {
+            if (Math.random() < 0.4) {
+                userCount += Math.floor(Math.random() * 5) + 1;
+                document.getElementById('userCount').textContent = userCount.toLocaleString();
+            }
+        }
+        
+        setInterval(updateUserCount, 8000);
+        
+        // CTA click handler
+        function handleClick() {
+            const button = document.querySelector('.cta-button');
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+            
+            // Update counter
+            userCount += Math.floor(Math.random() * 3) + 1;
+            document.getElementById('userCount').textContent = userCount.toLocaleString();
+            
+            // Redirect to your CPI offer
+            window.location.href = 'https://uplevelrewarded.com/aff_c?offer_id=2691&aff_id=23027';
+        }
+    </script>
+</body>
+</html>
